@@ -9,7 +9,7 @@ if(isset($_POST["submit"])){
 
 #query
 
-$sql = "INSERT INTO `details`(`id`, `firstname`, `secondname`, `email`, `phonenumber`) 
+$sql = "INSERT INTO `details`(`firstname`, `secondname`, `email`, `phonenumber`) 
 VALUES ('$firstname','$secondname','$email','$phonenumber')";
 
 #execute the query

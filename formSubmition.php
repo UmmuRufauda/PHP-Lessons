@@ -1,4 +1,6 @@
 <?php
+include"connect.php";
+
 if(isset($_POST["submit"])){
     $date = $_POST["date"];
     $number = $_POST["number"];
@@ -13,33 +15,26 @@ if(isset($_POST["submit"])){
     $idnumber = $_POST["idnumber"];
     $kids = $_POST["kids"];
     $nextkin = $_POST["nextkin"];
-    $idnumber = $_POST["idnumber"];
-    $kids = $_POST["kids"];
     $rship=$_POST["rship"];
     $insuranceplan=$_POST["insuranceplan"];
     $planID= $_POST["planID"];
     $medicalnumber = $_POST["medicalnumber"];
 
-    
+    #query
 
-    
-    echo" The date is $date<br>";
-    echo" The number is $number<br>";
-    echo" The Email is $email<br>";
-    echo" The Phone Number is $phonenumber<br>";
-    echo" The First Name is $firt<br>";
-    echo" The Second Name is $datemax<br>";
-    echo" The location is $location<br>";
-    echo" The gender is $gender<br>";
-    echo" The Marital Status is $maritalstatus<br>";
-    echo" The Member Number is $membernumber<br>";
-    echo" The ID Number is $idnumber<br>";
-    echo" I have $kids kids<br>";
-    echo" The Name Next of kin is $nextkin<br>";
-    echo" He/She is my $rship<br>";
-    echo" The Insurance plan is $insuranceplan<br>";
-    echo" The Plan ID is $planID<br>";
-    echo" The Medical Number is $medicalnumber<br>";   
+    $sql = "INSERT INTO `patient`(`date`, `number`, `email`, `phonenumber`, `firt`, `datemax`, `location`, `gender`, `maritalstatus`, `membernumber`, `idnumber`, `kids`, `nextkin`, `rship`, `insuranceplan`, `planID`, `medicalnumber`) 
+    VALUES ('$date','$number','$email',' $phonenumber','$firt','$datemax',' $location','$gender ','$maritalstatus','$membernumber','$idnumber','$kids',' $nextkin','$rship','$insuranceplan','$planID','$medicalnumber')";
+  
+  $result = mysqli_query($link, $sql);
+
+if($result){
+    echo"Record added successfully";
+    header("location:selectpatien.php");
+}
+else{
+    echo"error there is an error $sql".mysqli_error($link);
+}
+
 }
 else{
     echo"<h3>Please fill in the Form</h3>";
@@ -73,7 +68,7 @@ else{
             <fieldset>
                 <legend>Personal Details</legend>
                 <label>Full Name</label><label class="required">*</label>
-                <input type="text" class="input" name="firt" placeholder="First Name" required autofocus><br>
+                <input type="text" class="input" name="firt" placeholder="Full Name" required autofocus><br>
                 <label for="datemax">Date of birth</label><label class="required">*</label>
                 <input type="date" class="input" name="datemax" max="1999-12-31" placeholder="Date of Birth" required
                     autofocus><br>
@@ -104,8 +99,37 @@ else{
                 <input type="radio" name="maritalstatus" value="Widow">
                 <label>Widow</label>
             </fieldset>
+            <fieldset>
+                <legend>NHIF Details</legend>
+                <label>Member number</label><label class="required">*</label>
+                <input type="number" class="input" name="membernumber" placeholder="Member Number" required
+                    autofocus><br>
+                <label>National ID</label><label class="required">*</label>
+                <input type="number" name="idnumber" class="input" placeholder="ID Number" required autofocus><br>
+                <label>How many kids</label><label class="required">*</label>
+                <input type="number" name="kids" class="input" placeholder="kids you have" required autofocus><br>
+            </fieldset>
+            <fieldset>
+                <legend>Next of Kin Details</legend>
+                <label>Next of Kin</label><label class="required">*</label>
+                <input type="text" name="nextkin" class="input" placeholder="Next Of Kin" required autofocus><br>
+                <label>Relationship</label><label class="required">*</label>
+                <input type="text" name="rship" class="input" placeholder="Relationship" required autofocus><br>
+            </fieldset>
+            <fieldset>
+                <legend>Insurance Details</legend>
+                <label>Insurance Plan</label><label class="required">*</label>
+                <input type="text" name="insuranceplan" class="input" placeholder="insurance plan" required
+                    autofocus><br>
+                <label>Plan ID/Group Number</label><label class="required">*</label>
+                <input type="text" name="planID" class="input" placeholder="Relationship" required autofocus><br>
+                <label>Medicare Number</label><label class="required">*</label>
+                <input type="number" name="medicalnumber" class="input" placeholder="Medicare Number" required
+                    autofocus><br>
+            </fieldset>
+            <input id="btnsubmit" name="submit" type="submit">
+            <input id="btnrst" type="reset">
         </form>
-        <a class="linknext" href="formSubnext.php">Next</a>
     </div>
 
 </body>

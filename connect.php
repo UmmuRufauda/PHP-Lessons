@@ -1,8 +1,8 @@
 <?php
 
- $link =mysqli_connect(hostname: "localhost",username: "root",password: "",database: "chromium");
+ $link = mysqli_connect("localhost","root","","chromium");
 
- if($link==true){
+ if ($link == true){
 
      echo "SERVER CONNECTED SUCCESSFULLY";
 
